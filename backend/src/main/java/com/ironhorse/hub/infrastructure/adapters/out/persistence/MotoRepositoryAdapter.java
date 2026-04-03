@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * Implementa a porta de saída MotoRepository definida no Domínio.
  */
 @Component
+@SuppressWarnings("null")
 public class MotoRepositoryAdapter implements MotoRepository {
 
     private final JpaMotoRepository jpaRepository;
