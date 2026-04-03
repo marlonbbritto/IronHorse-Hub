@@ -1,15 +1,20 @@
-﻿# Definição da Stack Tecnológica (Tech Stack)
+﻿# Definição da Stack Tecnológica - IronHorse Hub
 
-Este arquivo define a pilha tecnológica oficial deste projeto. Os agentes de IA DEVEM ler este arquivo para determinar quais linguagens, frameworks e ferramentas utilizar antes de iniciar qualquer desenvolvimento.
+Este arquivo define a pilha tecnológica oficial para o projeto de gestão de eventos e manutenção Harley-Davidson.
 
 ## Backend
-- **Linguagem:** [Defina aqui, ex: Java 21+, Node.js, Python]
-- **Framework:** [Defina aqui, ex: Spring Boot, NestJS, FastAPI]
-- **Banco de Dados:** [Defina aqui, ex: PostgreSQL, MongoDB]
+- **Linguagem:** Java 21 (LTS)
+- **Framework:** Spring Boot 3.x
+- **Banco de Dados:** PostgreSQL (Instância Gratuita via Neon.tech ou Supabase)
+- **Ferramentas:** Maven, Spring Data JPA, Spring Security (OAuth2/JWT)
 
 ## Frontend
-- **Linguagem:** [Defina aqui, ex: TypeScript, JavaScript]
-- **Framework:** [Defina aqui, ex: Angular LTS, React.js, Vue 3]
+- **Linguagem:** TypeScript
+- **Framework:** Angular LTS
+- **Estilização:** Tailwind CSS ou Angular Material
+- **Estado:** Signals ou RxJS
 
 ## Arquitetura e Padrões Globais
-- **Padrão Arquitetural:** [Defina aqui, ex: Arquitetura Hexagonal, Clean Architecture]
+- **Padrão Arquitetural:** Arquitetura Hexagonal (Domain, Application, Infrastructure)
+- **Comunicação:** RESTful APIs (JSON)
+- **Mensageria (Opcional):** RabbitMQ (Local via Docker para testes de microserviços)
