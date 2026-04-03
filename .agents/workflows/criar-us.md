@@ -1,9 +1,8 @@
-﻿# Criar User Story (Planeamento Shift-Left)
-Descrição: Orquestra o planeamento inicial de uma funcionalidade antes de qualquer código ser escrito.
+﻿# Criar User Story (Planejamento Shift-Left)
+Descrição: Orquestra o planejamento inicial de uma funcionalidade.
 
 ## Passos a Seguir
-1. **Entrevista de Negócio:** Atue como @po e peça ao usuário os detalhes da funcionalidade que ele quer construir.
-2. **Estruturação INVEST:** Quando o usuário fornecer a ideia, use a skill validador-invest para criar o rascunho da User Story.
-3. **Desenho Arquitetural:** Pare e atue como @architect. Leia a US e o STACK.md. Escreva a 'Solução Técnica Definida' usando as skills domain-driven-design e c4-architecture para propor a melhor estrutura. Apresente ao usuário.
-4. **Critérios de Qualidade:** Atue como @qa_eng e adicione os 'Critérios de Teste e Aceite' (E2E) que deverão ser validados no futuro.
-5. **Aprovação e Salvamento:** Após a aprovação do usuário, salve o arquivo final obrigatoriamente na pasta _planejamento_squad/us_gerais/. Informe ao usuário que ele já pode rodar o comando /desenvolver-us.
+1. **Entrevista e Rascunho:** @po entrevista o usuário e gera o rascunho INVEST.
+2. **Refino Técnico:** @architect e @qa_eng adicionam a Solução Técnica e Critérios de Aceite conforme o STACK.md.
+3. **Consolidação:** Apresente o texto final COMPLETO ao usuário e peça "OK para salvar".
+4. **EXECUÇÃO OBRIGATÓRIA:** Após o "OK", o agente @devops deve interromper qualquer pensamento ou refinamento e salvar o arquivo imediatamente em _planejamento_squad/us_gerais/. É proibido sugerir melhorias após este passo.
