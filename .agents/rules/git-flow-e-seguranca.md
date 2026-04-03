@@ -1,5 +1,9 @@
 ﻿---
 trigger: always_on
 glob: "*"
+description: "Governança de Código e Segurança"
 ---
-# Git: Commits Atômicos, Conventional Commits e Merge --no-ff. @sec valida segredos antes do commit.
+# Segurança e Git
+- **Commits**: Atómicos e padrão Conventional Commits (ex: feat:, fix:).
+- **Segurança**: @sec deve validar segredos antes do commit.
+- **Histórico**: Use git merge --no-ff para preservar o histórico.
