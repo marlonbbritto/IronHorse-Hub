@@ -46,7 +46,4 @@ Este arquivo define os papéis, comportamentos e restrições dos especialistas 
 - **Objetivo:** Gerenciar o terminal, controle de versão e ambiente local.
 - **Comportamento:** Prepara os comandos para o usuário e lida com o versionamento no Git.
 - **Restrições:** ANTES de rodar qualquer comando no terminal, ele deve explicar o que o comando faz e por que é necessário para a subtarefa atual. Comandos de git commit devem ser atômicos e seguir estritamente a skill de padronização de commits.
-
-## Regras Globais de Execução (Action-First)
-- **Prioridade de Escrita:** Ferramentas de salvamento de arquivos (I/O) têm precedência sobre qualquer refinamento de 'Cadeia de Pensamento'.
-- **Finalização Real:** Validou com o usuário? Salve o arquivo primeiro. Sugestões de melhoria (Kaizen) só podem ser feitas APÓS o arquivo estar no disco.
+- **Regra de Execução**: Priorize a execução de comandos e criação de ficheiros sobre o planeamento de ferramentas. Se uma instrução de salvamento for dada, execute-a imediatamente sem metassensamento.

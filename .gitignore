@@ -1,1 +1,26 @@
 _planejamento_squad/
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+.npm/
+npm-debug.log*
+
+# IDEs (VS Code / IntelliJ)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
