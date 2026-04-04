@@ -3,17 +3,22 @@ package com.ironhorse.hub.infrastructure.adapters.in.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhorse.hub.application.dto.MotoInputDto;
 import com.ironhorse.hub.application.ports.in.CadastrarMotoUseCase;
+import com.ironhorse.hub.domain.TokenProvider;
+import com.ironhorse.hub.domain.UserRepository;
+import com.ironhorse.hub.infrastructure.config.JwtAuthenticationFilter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MotoController.class)
+@AutoConfigureMockMvc(addFilters = false)
 @SuppressWarnings("null")
 class MotoControllerIntegrationTest {
 
@@ -25,6 +30,16 @@ class MotoControllerIntegrationTest {
 
     @MockitoBean
     private CadastrarMotoUseCase cadastrarMotoUseCase;
+
+    // Mocks necessários para carregar o contexto de SecurityConfig/JwtAuthenticationFilter
+    @MockitoBean
+    private TokenProvider tokenProvider;
+
+    @MockitoBean
+    private JwtAuthenticationFilter jwtAuthFilter;
+
+    @MockitoBean
+    private UserRepository userRepository;
 
     @Test
     void shouldReturnBadRequestWhenInputIsInvalid() throws Exception {
