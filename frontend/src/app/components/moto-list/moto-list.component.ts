@@ -81,8 +81,17 @@ import { FormsModule } from '@angular/forms';
                  {{ moto.ano }}
                </div>
                
-               <div class="absolute top-4 right-4 bg-white/5 backdrop-blur-md text-gray-400 text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/10 uppercase tracking-widest">
-                 HD-CORE
+               <div class="absolute top-4 right-4 flex items-center gap-2">
+                 <a [routerLink]="['/garage', moto.id, 'services']" 
+                   class="bg-white/10 hover:bg-ironaccent backdrop-blur-md p-1.5 rounded-lg border border-white/10 transition-all duration-300 group/link"
+                   title="Histórico de Manutenções">
+                   <span class="text-[10px] text-gray-300 group-hover/link:text-white transition-colors uppercase font-black tracking-widest flex items-center gap-1.5">
+                     <span class="text-sm">⚙️</span>
+                   </span>
+                 </a>
+                 <div class="bg-white/5 backdrop-blur-md text-gray-400 text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/10 uppercase tracking-widest">
+                   HD-CORE
+                 </div>
                </div>
             </div>
             
