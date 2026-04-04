@@ -22,18 +22,18 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public User save(User user) {
         UserJpaEntity entity = toEntity(user);
-        UserJpaEntity saved = jpaUserRepository.save(entity);
+        UserJpaEntity saved = jpaUserRepository.save(java.util.Objects.requireNonNull(entity));
         return toDomain(saved);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return jpaUserRepository.findByEmail(email).map(this::toDomain);
+        return jpaUserRepository.findByEmail(java.util.Objects.requireNonNull(email)).map(this::toDomain);
     }
 
     @Override
     public Optional<User> findById(UUID id) {
-        return jpaUserRepository.findById(id).map(this::toDomain);
+        return jpaUserRepository.findById(java.util.Objects.requireNonNull(id)).map(this::toDomain);
     }
 
     private User toDomain(UserJpaEntity entity) {
