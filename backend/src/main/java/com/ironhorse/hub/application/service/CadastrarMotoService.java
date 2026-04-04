@@ -45,7 +45,8 @@ public class CadastrarMotoService implements CadastrarMotoUseCase {
             motoSalva.getKm(),
             motoSalva.getPlaca(),
             motoSalva.getVin(),
-            motoSalva.getOwnerEmail()
+            motoSalva.getOwnerEmail(),
+            motoSalva.getDataUltimaAtualizacao()
         );
     }
 }

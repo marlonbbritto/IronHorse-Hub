@@ -10,5 +10,6 @@ public record MotoOutputDto(
     Double km,
     String placa,
     String vin,
-    String ownerEmail
+    String ownerEmail,
+    java.time.LocalDate dataUltimaAtualizacao
 ) {}

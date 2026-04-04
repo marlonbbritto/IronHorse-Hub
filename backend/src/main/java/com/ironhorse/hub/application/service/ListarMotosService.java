@@ -29,7 +29,8 @@ public class ListarMotosService implements ListarMotosUseCase {
                 moto.getKm(),
                 moto.getPlaca(),
                 moto.getVin(),
-                moto.getOwnerEmail()
+                moto.getOwnerEmail(),
+                moto.getDataUltimaAtualizacao()
             ))
             .collect(Collectors.toList());
     }

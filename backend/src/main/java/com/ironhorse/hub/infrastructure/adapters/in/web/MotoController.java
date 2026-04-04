@@ -17,10 +17,14 @@ public class MotoController {
 
     private final CadastrarMotoUseCase cadastrarMotoUseCase;
     private final ListarMotosUseCase listarMotosUseCase;
+    private final com.ironhorse.hub.application.ports.in.AtualizarHodometroUseCase atualizarHodometroUseCase;
 
-    public MotoController(CadastrarMotoUseCase cadastrarMotoUseCase, ListarMotosUseCase listarMotosUseCase) {
+    public MotoController(CadastrarMotoUseCase cadastrarMotoUseCase, 
+                          ListarMotosUseCase listarMotosUseCase,
+                          com.ironhorse.hub.application.ports.in.AtualizarHodometroUseCase atualizarHodometroUseCase) {
         this.cadastrarMotoUseCase = cadastrarMotoUseCase;
         this.listarMotosUseCase = listarMotosUseCase;
+        this.atualizarHodometroUseCase = atualizarHodometroUseCase;
     }
 
     @PostMapping
@@ -28,6 +32,16 @@ public class MotoController {
         String ownerEmail = principal.getName();
         MotoOutputDto outputDto = cadastrarMotoUseCase.execute(inputDto, ownerEmail);
         return ResponseEntity.status(HttpStatus.CREATED).body(outputDto);
+    }
+
+    @PatchMapping("/{id}/hodometro")
+    public ResponseEntity<MotoOutputDto> atualizarHodometro(
+            @PathVariable Long id,
+            @RequestBody @Valid com.ironhorse.hub.application.dto.HodometroInputDto inputDto,
+            Principal principal) {
+        String ownerEmail = principal.getName();
+        MotoOutputDto outputDto = atualizarHodometroUseCase.execute(id, inputDto, ownerEmail);
+        return ResponseEntity.ok(outputDto);
     }
 
     @GetMapping
