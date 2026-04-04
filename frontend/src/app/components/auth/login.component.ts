@@ -9,60 +9,67 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   template: `
-    <div class="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
-      <div class="max-w-md w-full space-y-8 bg-[#1a1a1a] p-10 rounded-xl shadow-2xl border border-white/10">
-        <div class="text-center">
-          <h1 class="text-4xl font-bold tracking-tight text-white mb-2 uppercase italic">
-            IRONHORSE <span class="text-orange-600">HUB</span>
+    <div class="min-h-screen flex items-center justify-center bg-ironbase relative overflow-hidden">
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0 bg-[url('/assets/login-bg.png')] bg-cover bg-center scale-105 blur-sm opacity-40"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-ironbase/50 via-transparent to-ironbase"></div>
+
+      <!-- Login Card -->
+      <div class="max-w-md w-full glass p-10 rounded-3xl shadow-2xl relative z-10 border border-white/5 animate-glow">
+        <div class="text-center mb-8">
+          <h1 class="text-5xl font-black tracking-tighter text-white mb-2 uppercase italic font-brand">
+            IRONHORSE <span class="text-ironaccent">HUB</span>
           </h1>
-          <p class="text-gray-400">Acesse sua garagem lendária</p>
+          <div class="h-1 w-24 bg-ironaccent mx-auto rounded-full mb-4"></div>
+          <p class="text-gray-400 font-medium tracking-wide uppercase text-xs">Acesse sua garagem lendária</p>
         </div>
         
-        <form class="mt-8 space-y-6" (ngSubmit)="onSubmit()">
-          <div class="rounded-md shadow-sm -space-y-px">
-            <div class="mb-4">
-              <label for="email" class="sr-only">Email</label>
+        <form class="space-y-6" (ngSubmit)="onSubmit()">
+          <div class="space-y-4">
+            <div class="group">
+              <label for="email" class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1 ml-1 group-focus-within:text-ironaccent transition-colors">E-mail do Piloto</label>
               <input id="email" name="email" type="email" required [(ngModel)]="credentials.email"
-                class="appearance-none rounded-lg relative block w-full px-3 py-3 border border-white/10 bg-[#0a0a0a] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent sm:text-sm" 
-                placeholder="Seu email">
+                class="w-full px-4 py-4 rounded-xl bg-ironbase/60 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-ironaccent focus:border-transparent transition-all font-medium" 
+                placeholder="exemplo@ironhorse.com">
             </div>
-            <div>
-              <label for="password" class="sr-only">Senha</label>
+            <div class="group">
+              <label for="password" class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1 ml-1 group-focus-within:text-ironaccent transition-colors">Senha Secreta</label>
               <input id="password" name="password" type="password" required [(ngModel)]="credentials.password"
-                class="appearance-none rounded-lg relative block w-full px-3 py-3 border border-white/10 bg-[#0a0a0a] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent sm:text-sm" 
-                placeholder="Sua senha">
+                class="w-full px-4 py-4 rounded-xl bg-ironbase/60 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-ironaccent focus:border-transparent transition-all font-medium" 
+                placeholder="••••••••">
             </div>
           </div>
 
           @if (error) {
-            <div class="text-red-500 text-sm bg-red-500/10 p-3 rounded-lg border border-red-500/20">
-              {{ error }}
+            <div class="text-red-400 text-xs bg-red-400/10 p-4 rounded-xl border border-red-400/20 flex items-center gap-2">
+              <span class="text-lg">⚠️</span> {{ error }}
             </div>
           }
 
-          <div class="flex items-center justify-between">
-            <div class="text-sm">
-              <a routerLink="/recovery" class="font-medium text-gray-400 hover:text-orange-600 transition-colors">
-                Esqueceu a senha?
-              </a>
-            </div>
+          <div class="flex items-center justify-end">
+            <a routerLink="/recovery" class="text-xs font-bold text-gray-500 hover:text-ironaccent transition-colors uppercase tracking-widest">
+              Esqueceu a senha?
+            </a>
           </div>
 
           <div>
             <button type="submit" [disabled]="loading"
-              class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-600 transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 italic uppercase">
+              class="w-full py-4 px-6 bg-ironaccent hover:bg-orange-700 text-white font-black rounded-xl transition-all shadow-lg shadow-orange-900/20 hover:shadow-ironaccent/40 active:scale-[0.98] disabled:opacity-50 italic uppercase tracking-tighter text-lg">
               @if (loading) {
-                <span class="animate-pulse">ENTRANDO...</span>
+                <span class="flex items-center justify-center gap-2">
+                  <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  ACELERANDO...
+                </span>
               } @else {
                 INICIAR JORNADA
               }
             </button>
           </div>
 
-          <div class="text-center mt-4">
-            <p class="text-gray-400 text-sm">
-              Não tem uma conta? 
-              <a routerLink="/register" class="text-orange-600 hover:underline font-bold">Cadastre-se</a>
+          <div class="text-center pt-4 border-t border-white/5">
+            <p class="text-gray-500 text-xs font-medium uppercase tracking-wide">
+              Novo no bando? 
+              <a routerLink="/register" class="text-ironaccent hover:text-white transition-colors font-bold ml-1">Crie sua conta</a>
             </p>
           </div>
         </form>

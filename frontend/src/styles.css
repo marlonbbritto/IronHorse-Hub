@@ -1,1 +1,64 @@
-/* IronHorse Hub - Reset Manual para Estabilização */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600;800&display=swap');
+
+@theme {
+  --color-ironbase: #121111;
+  --color-ironaccent: #F25F0F;
+  --color-ironmetal: #1A1A1A;
+  --font-brand: "Outfit", "Inter", sans-serif;
+  --shadow-orange-glow: 0 0 20px rgba(242, 95, 15, 0.4);
+  --shadow-orange-strong: 0 0 35px rgba(242, 95, 15, 0.6);
+  --background-image-industrial-gradient: linear-gradient(135deg, #121111 0%, #1A1A1A 100%);
+}
+
+:root {
+  --ironbase: #121111;
+  --ironaccent: #F25F0F;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--ironbase);
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #F25F0F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d14d0c;
+}
+
+/* Custom animations */
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 5px rgba(242, 95, 15, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(242, 95, 15, 0.5); }
+  100% { box-shadow: 0 0 5px rgba(242, 95, 15, 0.3); }
+}
+
+.animate-glow {
+  animation: glow-pulse 3s infinite ease-in-out;
+}

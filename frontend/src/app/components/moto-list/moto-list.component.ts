@@ -18,23 +18,30 @@ interface Moto {
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <div class="min-h-screen bg-[#0a0a0a] text-white p-6 md:p-12">
+    <div class="min-h-screen bg-ironbase text-white p-6 md:p-12 selection:bg-ironaccent selection:text-white">
+      <!-- Decor Background -->
+      <div class="fixed top-0 right-0 w-1/3 h-1/3 bg-ironaccent/5 blur-[120px] rounded-full -z-10"></div>
+      <div class="fixed bottom-0 left-0 w-1/2 h-1/2 bg-white/5 blur-[150px] rounded-full -z-10"></div>
+
       <!-- Header -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6 relative">
         <div>
-          <h1 class="text-4xl font-black tracking-tighter uppercase italic">
-            Minha <span class="text-orange-600 text-5xl">Garagem</span>
+          <h1 class="text-5xl font-black tracking-tighter uppercase italic font-brand leading-none">
+            Minha <span class="text-ironaccent">Garagem</span>
           </h1>
-          <p class="text-gray-400 mt-2">Gestão de frota IronHorse</p>
+          <div class="flex items-center gap-2 mt-3">
+            <div class="h-[2px] w-12 bg-ironaccent"></div>
+            <p class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Gestão de Frota IronHorse Hub</p>
+          </div>
         </div>
         
-        <div class="flex gap-4">
+        <div class="flex items-center gap-4">
           <button routerLink="/garage/new" 
-            class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-full transition-all shadow-lg hover:shadow-orange-500/20 active:scale-95 flex items-center gap-2">
-            <span>+</span> ADICIONAR MOTO
+            class="bg-ironaccent hover:bg-orange-700 text-white font-black py-4 px-8 rounded-xl transition-all shadow-lg hover:shadow-ironaccent/30 active:scale-95 flex items-center gap-3 italic uppercase tracking-tight">
+            <span>+</span> ADICIONAR MÁQUINA
           </button>
           <button (click)="logout()" 
-            class="bg-[#1a1a1a] hover:bg-white/10 text-gray-400 font-bold py-3 px-6 rounded-full border border-white/10 transition-all">
+            class="bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-bold py-4 px-6 rounded-xl border border-white/10 transition-all uppercase text-xs tracking-widest">
             SAIR
           </button>
         </div>
@@ -42,46 +49,63 @@ interface Moto {
 
       <!-- Loading State -->
       @if (loading()) {
-        <div class="flex justify-center items-center h-64">
-          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-600"></div>
+        <div class="flex flex-col justify-center items-center h-96 gap-4">
+          <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-ironaccent"></div>
+          <p class="text-ironaccent font-black italic uppercase animate-pulse">Sincronizando Motores...</p>
         </div>
       }
 
       <!-- Empty State -->
       @if (!loading() && motos().length === 0) {
-        <div class="bg-[#1a1a1a] rounded-2xl p-12 text-center border border-dashed border-white/10">
-          <div class="text-gray-400 text-6xl mb-4">🏍️</div>
-          <h3 class="text-2xl font-bold mb-2 uppercase">Sua garagem está vazia</h3>
-          <p class="text-gray-400 mb-6">Comece cadastrando sua primeira Harley-Davidson agora mesmo.</p>
-          <button routerLink="/garage/new" class="text-orange-600 font-bold hover:underline">Cadastrar Agora</button>
+        <div class="glass rounded-3xl p-20 text-center border-dashed border-2 border-white/5">
+          <div class="text-7xl mb-6 grayscale opacity-30">🏍️</div>
+          <h3 class="text-3xl font-black mb-3 uppercase italic font-brand">Sua garagem está silenciosa</h3>
+          <p class="text-gray-500 mb-10 max-w-md mx-auto font-medium">O asfalto está chamando. Comece cadastrando sua primeira Harley-Davidson agora mesmo.</p>
+          <button routerLink="/garage/new" class="text-ironaccent font-black hover:text-white transition-colors uppercase tracking-widest border-b-2 border-ironaccent pb-1">Cadastrar Agora</button>
         </div>
       }
 
       <!-- Grid de Motos -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         @for (moto of motos(); track moto.id) {
-          <div class="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-xl border border-white/10 hover:border-orange-600/50 transition-all group">
-            <div class="h-48 bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] relative flex items-center justify-center p-8">
-               <div class="text-8xl opacity-20 filter grayscale group-hover:grayscale-0 transition-all duration-500">🏍️</div>
-               <div class="absolute bottom-4 left-4 bg-orange-600 text-white text-[10px] font-black px-2 py-1 rounded italic uppercase">
+          <div class="glass rounded-3xl overflow-hidden shadow-2xl border border-white/5 hover:border-ironaccent/40 transition-all duration-500 group relative">
+            <!-- Card Header/Image Area -->
+            <div class="h-56 bg-gradient-to-br from-ironbase to-ironmetal relative flex items-center justify-center p-8 overflow-hidden">
+               <div class="absolute inset-0 bg-ironaccent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+               <div class="text-9xl opacity-10 filter grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 transform group-hover:scale-110">🏍️</div>
+               
+               <div class="absolute top-4 left-4 bg-ironaccent text-white text-[10px] font-black px-3 py-1.5 rounded-lg italic uppercase tracking-tighter">
                  {{ moto.ano }}
+               </div>
+               
+               <div class="absolute top-4 right-4 bg-white/5 backdrop-blur-md text-gray-400 text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/10 uppercase tracking-widest">
+                 HD-CORE
                </div>
             </div>
             
-            <div class="p-6">
-              <h3 class="text-xl font-bold truncate mb-1 uppercase tracking-tight italic">{{ moto.modelo }}</h3>
-              <p class="text-gray-400 text-sm mb-4 font-mono">{{ moto.placa || 'SEM PLACA' }}</p>
-              
-              <div class="flex items-center justify-between mt-6 bg-[#0a0a0a] p-4 rounded-xl">
-                <div>
-                  <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-none mb-1">Quilometragem</p>
-                  <p class="text-xl font-black text-white leading-none italic">{{ moto.km | number }} <span class="text-xs text-orange-600">KM</span></p>
+            <!-- Card Body -->
+            <div class="p-8">
+              <div class="mb-6">
+                <h3 class="text-2xl font-black truncate mb-1 uppercase tracking-tighter italic font-brand group-hover:text-ironaccent transition-colors">{{ moto.modelo }}</h3>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                  <p class="text-gray-500 text-[10px] font-bold tracking-widest uppercase">{{ moto.placa || 'Sem Placa Registrada' }}</p>
                 </div>
-                <button class="bg-white/5 hover:bg-orange-600 p-3 rounded-lg transition-colors">
-                  <span class="text-orange-600 group-hover:text-white">➔</span>
+              </div>
+              
+              <div class="flex items-center justify-between mt-8 bg-ironbase/50 p-5 rounded-2xl border border-white/5 group-hover:border-ironaccent/20 transition-all">
+                <div>
+                  <p class="text-[9px] text-gray-500 uppercase font-black tracking-[0.2em] leading-none mb-2">Quilometragem</p>
+                  <p class="text-2xl font-black text-white leading-none italic font-brand">{{ moto.km | number }} <span class="text-xs text-ironaccent ml-1 font-bold">KM</span></p>
+                </div>
+                <button class="bg-white/5 hover:bg-ironaccent p-4 rounded-xl transition-all duration-300 group-hover:shadow-ironaccent/20 group-hover:shadow-lg">
+                  <span class="text-ironaccent group-hover:text-white transition-colors">➔</span>
                 </button>
               </div>
             </div>
+
+            <!-- Detail Line -->
+            <div class="h-1 w-0 bg-ironaccent group-hover:w-full transition-all duration-700"></div>
           </div>
         }
       </div>
@@ -100,8 +124,8 @@ export class MotoListComponent implements OnInit {
   }
 
   fetchMotos() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
-    this.http.get<Moto[]>('/api/v1/motos', { headers }).subscribe({
+    // O interceptor já trata o Authorization header automaticamente
+    this.http.get<Moto[]>('/api/v1/motos').subscribe({
       next: (data) => {
         this.motos.set(data);
         this.loading.set(false);

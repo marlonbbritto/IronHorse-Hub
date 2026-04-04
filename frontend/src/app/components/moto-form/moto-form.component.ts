@@ -14,77 +14,86 @@ import { Moto } from '../../models/moto.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
-    <div class="min-h-screen bg-[#0a0a0a] text-white p-6 md:p-12">
-      <div class="max-w-2xl mx-auto">
+    <div class="min-h-screen bg-ironbase text-white p-6 md:p-12 relative overflow-hidden">
+      <!-- Decor Background -->
+      <div class="fixed top-0 left-0 w-1/3 h-1/3 bg-ironaccent/5 blur-[120px] rounded-full -z-10"></div>
+
+      <div class="max-w-2xl mx-auto relative z-10">
         <!-- Header -->
-        <div class="mb-10 flex items-center gap-4">
-          <button routerLink="/garage" class="text-gray-400 hover:text-white transition-colors">
-            <span class="text-2xl">←</span>
+        <div class="mb-12 flex items-center gap-6">
+          <button routerLink="/garage" class="w-12 h-12 glass flex items-center justify-center rounded-full text-gray-400 hover:text-ironaccent hover:border-ironaccent/50 transition-all active:scale-90">
+            <span class="text-xl">←</span>
           </button>
-          <h1 class="text-3xl font-black uppercase italic tracking-tighter">
-            Cadastrar <span class="text-orange-600">Máquina</span>
-          </h1>
+          <div>
+            <h1 class="text-4xl font-black uppercase italic tracking-tighter font-brand leading-none">
+              Cadastrar <span class="text-ironaccent">Máquina</span>
+            </h1>
+            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-2">Adicionar novo exemplar ao bando</p>
+          </div>
         </div>
 
-        <div class="bg-[#1a1a1a] rounded-2xl shadow-2xl p-8 border border-white/10">
-          <form [formGroup]="motoForm" (ngSubmit)="onSubmit()" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass rounded-3xl shadow-2xl p-10 border border-white/5">
+          <form [formGroup]="motoForm" (ngSubmit)="onSubmit()" class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <!-- Modelo -->
-              <div class="md:col-span-2">
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Modelo da Moto</label>
+              <div class="md:col-span-2 group">
+                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1 group-focus-within:text-ironaccent transition-colors">Modelo da Moto</label>
                 <input formControlName="modelo" placeholder="Ex: Road King Special"
-                  class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-600 text-white placeholder-white/20 uppercase italic font-bold">
+                  class="w-full bg-ironbase/60 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-ironaccent text-white placeholder-white/10 uppercase italic font-bold transition-all shadow-inner">
               </div>
 
               <!-- Ano -->
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Ano</label>
+              <div class="group">
+                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1 group-focus-within:text-ironaccent transition-colors">Ano de Fabricação</label>
                 <input type="number" formControlName="ano"
-                  class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-600 text-white font-bold">
+                  class="w-full bg-ironbase/60 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-ironaccent text-white font-bold transition-all shadow-inner">
               </div>
 
               <!-- KM -->
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">KM Atual</label>
+              <div class="group">
+                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1 group-focus-within:text-ironaccent transition-colors">Quilometragem Atual</label>
                 <input type="number" formControlName="km"
-                  class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-600 text-white font-bold">
+                  class="w-full bg-ironbase/60 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-ironaccent text-white font-bold transition-all shadow-inner">
               </div>
 
               <!-- Placa -->
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Placa (Opcional)</label>
+              <div class="group">
+                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1 group-focus-within:text-ironaccent transition-colors">Placa (Opcional)</label>
                 <input formControlName="placa" placeholder="ABC-1234"
-                  class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-600 text-white uppercase placeholder-white/20 font-bold">
+                  class="w-full bg-ironbase/60 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-ironaccent text-white uppercase placeholder-white/10 font-bold transition-all shadow-inner">
               </div>
 
               <!-- VIN -->
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Número do Chassi (VIN)</label>
+              <div class="group">
+                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-1 group-focus-within:text-ironaccent transition-colors">Número do Chassi (VIN)</label>
                 <input formControlName="vin" placeholder="17 caracteres"
-                  class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-600 text-white uppercase placeholder-white/20 font-bold">
+                  class="w-full bg-ironbase/60 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-ironaccent text-white uppercase placeholder-white/10 font-bold transition-all shadow-inner">
               </div>
             </div>
 
             @if (errorMessage()) {
-              <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-red-500 text-sm">
-                {{ errorMessage() }}
+              <div class="bg-red-500/10 border border-red-500/20 p-5 rounded-2xl text-red-500 text-xs flex items-center gap-3">
+                <span class="text-xl">⚠️</span> {{ errorMessage() }}
               </div>
             }
 
             @if (successMessage()) {
-              <div class="bg-green-500/10 border border-green-500/20 p-4 rounded-xl text-green-500 text-sm">
-                {{ successMessage() }}
+              <div class="bg-green-500/10 border border-green-500/20 p-5 rounded-2xl text-green-500 text-xs flex items-center gap-3">
+                 <span class="text-xl">✅</span> {{ successMessage() }}
               </div>
             }
 
-            <div class="pt-6 border-t border-white/5 flex justify-end gap-4">
-              <button type="button" routerLink="/garage" class="px-6 py-3 text-gray-400 font-bold hover:text-white transition-colors uppercase">
+            <div class="pt-10 border-t border-white/5 flex items-center justify-between">
+              <button type="button" routerLink="/garage" class="text-xs font-black text-gray-500 hover:text-white transition-colors uppercase tracking-[0.2em]">
                 CANCELAR
               </button>
               <button type="submit" [disabled]="motoForm.invalid || isSubmitting()"
-                class="bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white font-black py-3 px-10 rounded-full transition-all shadow-lg hover:shadow-orange-500/40 active:scale-95 italic uppercase">
+                class="bg-ironaccent hover:bg-orange-700 disabled:opacity-30 text-white font-black py-4 px-12 rounded-2xl transition-all shadow-xl shadow-orange-900/20 hover:shadow-ironaccent/30 active:scale-95 italic uppercase tracking-tighter text-lg">
                 @if (isSubmitting()) {
-                  <span class="animate-pulse">PROCESSANDO...</span>
+                  <span class="flex items-center gap-2">
+                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    GRAVANDO...
+                  </span>
                 } @else {
                   GRAVAR NA GARAGEM
                 }
