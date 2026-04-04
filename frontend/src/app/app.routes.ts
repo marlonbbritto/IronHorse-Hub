@@ -5,6 +5,7 @@ import { MotoListComponent } from './components/moto-list/moto-list.component';
 import { MotoFormComponent } from './components/moto-form/moto-form.component';
 import { MotoServiceHistoryComponent } from './components/moto-service-history/moto-service-history.component';
 import { MotoServiceFormComponent } from './components/moto-service-form/moto-service-form.component';
+import { MotoHealthSettingsComponent } from './components/moto-health-settings/moto-health-settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'garage', pathMatch: 'full' },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'garage', component: MotoListComponent },
   { path: 'garage/new', component: MotoFormComponent },
   { path: 'garage/:id/services', component: MotoServiceHistoryComponent },
-  { path: 'garage/:id/services/new', component: MotoServiceFormComponent }
+  { path: 'garage/:id/services/new', component: MotoServiceFormComponent },
+  { path: 'garage/:id/health', component: MotoHealthSettingsComponent }
 ];

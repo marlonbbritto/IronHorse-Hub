@@ -4,6 +4,13 @@ import { RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 
+interface ItemSaude {
+  tipoServico: string;
+  kmRestante: number;
+  percentualVidaUtil: number;
+  statusVisual: string;
+}
+
 interface Moto {
   id: number;
   modelo: string;
@@ -12,6 +19,7 @@ interface Moto {
   placa: string;
   vin: string;
   dataUltimaAtualizacao: string;
+  saude?: ItemSaude[];
 }
 
 import { FormsModule } from '@angular/forms';
@@ -71,7 +79,10 @@ import { FormsModule } from '@angular/forms';
       <!-- Grid de Motos -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         @for (moto of motos(); track moto.id) {
-          <div class="glass rounded-3xl overflow-hidden shadow-2xl border border-white/5 hover:border-ironaccent/40 transition-all duration-500 group relative">
+          <div [class.animate-glow]="hasCriticalAlert(moto)"
+            [class.shadow-ironaccent-glow]="hasCriticalAlert(moto)"
+            class="glass rounded-3xl overflow-hidden shadow-2xl border border-white/5 hover:border-ironaccent/40 transition-all duration-500 group relative">
+            
             <!-- Card Header/Image Area -->
             <div class="h-56 bg-gradient-to-br from-ironbase to-ironmetal relative flex items-center justify-center p-8 overflow-hidden">
                <div class="absolute inset-0 bg-ironaccent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -89,6 +100,13 @@ import { FormsModule } from '@angular/forms';
                      <span class="text-sm">⚙️</span>
                    </span>
                  </a>
+                 <a [routerLink]="['/garage', moto.id, 'health']" 
+                   class="bg-white/10 hover:bg-green-600 backdrop-blur-md p-1.5 rounded-lg border border-white/10 transition-all duration-300 group/health"
+                   title="Configurar Metas de Saúde">
+                   <span class="text-[10px] text-gray-300 group-hover/health:text-white transition-colors uppercase font-black tracking-widest flex items-center gap-1.5">
+                     <span class="text-sm">🩺</span>
+                   </span>
+                 </a>
                  <div class="bg-white/5 backdrop-blur-md text-gray-400 text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/10 uppercase tracking-widest">
                    HD-CORE
                  </div>
@@ -98,6 +116,11 @@ import { FormsModule } from '@angular/forms';
             <!-- Card Body -->
             <div class="p-8">
               <div class="mb-6">
+                @if (hasCriticalAlert(moto)) {
+                  <div class="text-ironaccent text-[9px] font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5 animate-pulse">
+                    <span class="text-xs">⚠️</span> Manutenção Necessária
+                  </div>
+                }
                 <h3 class="text-2xl font-black truncate mb-1 uppercase tracking-tighter italic font-brand group-hover:text-ironaccent transition-colors">{{ moto.modelo }}</h3>
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -160,9 +183,23 @@ export class MotoListComponent implements OnInit {
       next: (data) => {
         this.motos.set(data);
         this.loading.set(false);
+        // Buscar saúde para cada moto
+        data.forEach(m => this.fetchHealth(m.id));
       },
       error: () => this.loading.set(false)
     });
+  }
+
+  fetchHealth(motoId: number) {
+    this.http.get<{ itens: ItemSaude[] }>(`/api/v1/motos/${motoId}/alertas/saude`).subscribe({
+      next: (res) => {
+        this.motos.update(prev => prev.map(m => m.id === motoId ? { ...m, saude: res.itens } : m));
+      }
+    });
+  }
+
+  hasCriticalAlert(moto: Moto): boolean {
+    return moto.saude?.some(s => s.statusVisual === 'CRITICO' || s.statusVisual === 'ALERTA') || false;
   }
 
   startEdit(moto: Moto) {

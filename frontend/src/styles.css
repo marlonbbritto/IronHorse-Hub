@@ -62,3 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 .animate-glow {
   animation: glow-pulse 3s infinite ease-in-out;
 }
+
+.shadow-ironaccent-glow {
+  box-shadow: var(--shadow-orange-glow);
+}
