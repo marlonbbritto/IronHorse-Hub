@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 /**
  * Interface Spring Data JPA para acesso direto à infraestrutura.
  */
+import java.util.List;
+
 @Repository
 public interface JpaMotoRepository extends JpaRepository<MotoJpaEntity, Long> {
+    List<MotoJpaEntity> findByOwnerEmail(String ownerEmail);
 }

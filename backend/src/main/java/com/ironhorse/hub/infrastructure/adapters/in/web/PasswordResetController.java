@@ -6,10 +6,14 @@ import com.ironhorse.hub.application.ports.in.RequestPasswordResetUseCase;
 import com.ironhorse.hub.application.ports.in.ResetPasswordUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador REST para o fluxo de redefinição de senha.
+ * Controlador REST para recuperação de senha.
+ * Canal de entrada (Inbound Adapter).
  */
 @RestController
 @RequestMapping("/api/v1/users/password-reset")
@@ -23,14 +27,20 @@ public class PasswordResetController {
         this.resetUseCase = resetUseCase;
     }
 
+    /**
+     * Solicita um token de recuperação de senha.
+     */
     @PostMapping("/request")
-    public ResponseEntity<Void> requestReset(@Valid @RequestBody PasswordResetRequestDTO requestDTO) {
+    public ResponseEntity<Void> request(@Valid @RequestBody PasswordResetRequestDTO requestDTO) {
         requestUseCase.request(requestDTO.email());
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/confirm")
-    public ResponseEntity<Void> confirmReset(@Valid @RequestBody PasswordResetConfirmDTO confirmDTO) {
+    /**
+     * Confirma o reset de senha com o token e nova senha.
+     */
+    @PostMapping("/confirm")
+    public ResponseEntity<Void> confirm(@Valid @RequestBody PasswordResetConfirmDTO confirmDTO) {
         resetUseCase.reset(confirmDTO.token(), confirmDTO.newPassword());
         return ResponseEntity.ok().build();
     }

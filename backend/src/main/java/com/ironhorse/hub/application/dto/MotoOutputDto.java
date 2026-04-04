@@ -9,5 +9,6 @@ public record MotoOutputDto(
     Integer ano,
     Double km,
     String placa,
-    String vin
+    String vin,
+    String ownerEmail
 ) {}

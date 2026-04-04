@@ -42,6 +42,13 @@ public class MotoRepositoryAdapter implements MotoRepository {
     }
 
     @Override
+    public List<Moto> findAllByOwnerEmail(String email) {
+        return jpaRepository.findByOwnerEmail(email).stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }
@@ -55,6 +62,7 @@ public class MotoRepositoryAdapter implements MotoRepository {
         entity.setKm(domain.getKm());
         entity.setPlaca(domain.getPlaca());
         entity.setVin(domain.getVin());
+        entity.setOwnerEmail(domain.getOwnerEmail());
         return entity;
     }
 
@@ -65,7 +73,8 @@ public class MotoRepositoryAdapter implements MotoRepository {
             entity.getAno(),
             entity.getKm(),
             entity.getPlaca(),
-            entity.getVin()
+            entity.getVin(),
+            entity.getOwnerEmail()
         );
     }
 }

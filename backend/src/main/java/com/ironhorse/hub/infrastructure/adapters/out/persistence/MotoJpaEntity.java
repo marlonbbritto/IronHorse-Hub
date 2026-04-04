@@ -27,9 +27,12 @@ public class MotoJpaEntity {
 
     private String vin;
 
+    @Column(name = "owner_email", nullable = false)
+    private String ownerEmail;
+
     public MotoJpaEntity() {}
 
-    // Getters e Setters (Manuais para evitar dependência externa de Lombok se não confirmada no setup)
+    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getModelo() { return modelo; }
@@ -42,4 +45,6 @@ public class MotoJpaEntity {
     public void setPlaca(String placa) { this.placa = placa; }
     public String getVin() { return vin; }
     public void setVin(String vin) { this.vin = vin; }
+    public String getOwnerEmail() { return ownerEmail; }
+    public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
 }

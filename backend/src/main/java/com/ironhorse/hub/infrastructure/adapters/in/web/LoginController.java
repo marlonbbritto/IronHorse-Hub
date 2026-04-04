@@ -27,6 +27,6 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
         AuthToken token = authenticateUserUseCase.authenticate(loginRequestDTO.email(), loginRequestDTO.password());
-        return ResponseEntity.ok(new LoginResponseDTO(token.token(), token.type()));
+        return ResponseEntity.ok(new LoginResponseDTO(token.token(), token.type(), loginRequestDTO.email()));
     }
 }

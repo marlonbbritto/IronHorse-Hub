@@ -18,7 +18,8 @@ class CadastrarMotoServiceTest {
         MotoRepository repository = Mockito.mock(MotoRepository.class);
         
         // Mock do comportamento de salvamento
-        Moto motoSalva = new Moto(10L, "Dyna Super Glide", 2012, 45000.0, "KJB-9900", null);
+        String ownerEmail = "test@example.com";
+        Moto motoSalva = new Moto(10L, "Dyna Super Glide", 2012, 45000.0, "KJB-9900", null, ownerEmail);
         Mockito.when(repository.save(any(Moto.class))).thenReturn(motoSalva);
 
         // Instanciação do Use Case (Application Service)
@@ -30,7 +31,7 @@ class CadastrarMotoServiceTest {
         );
 
         // Execução do Use Case
-        MotoOutputDto result = service.execute(inputDto);
+        MotoOutputDto result = service.execute(inputDto, ownerEmail);
 
         // Verificações
         assertNotNull(result);

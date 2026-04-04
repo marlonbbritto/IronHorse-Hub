@@ -13,10 +13,11 @@ public class Moto {
     private Double km;
     private String placa;
     private String vin;
+    private String ownerEmail;
 
     public Moto() {}
 
-    public Moto(Long id, String modelo, Integer ano, Double km, String placa, String vin) {
+    public Moto(Long id, String modelo, Integer ano, Double km, String placa, String vin, String ownerEmail) {
         validate(modelo, ano, km);
         this.id = id;
         this.modelo = modelo;
@@ -24,6 +25,7 @@ public class Moto {
         this.km = km;
         this.placa = placa;
         this.vin = vin;
+        this.ownerEmail = ownerEmail;
     }
 
     private void validate(String modelo, Integer ano, Double km) {
@@ -65,6 +67,9 @@ public class Moto {
 
     public String getVin() { return vin; }
     public void setVin(String vin) { this.vin = vin; }
+
+    public String getOwnerEmail() { return ownerEmail; }
+    public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
 
     @Override
     public boolean equals(Object o) {

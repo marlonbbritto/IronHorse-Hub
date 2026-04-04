@@ -8,5 +8,5 @@ import com.ironhorse.hub.application.dto.MotoOutputDto;
  * Segue os princípios da Arquitetura Hexagonal.
  */
 public interface CadastrarMotoUseCase {
-    MotoOutputDto execute(MotoInputDto input);
+    MotoOutputDto execute(MotoInputDto input, String ownerEmail);
 }

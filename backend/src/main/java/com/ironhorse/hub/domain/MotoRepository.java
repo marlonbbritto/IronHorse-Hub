@@ -11,5 +11,6 @@ public interface MotoRepository {
     Moto save(Moto moto);
     Optional<Moto> findById(Long id);
     List<Moto> findAll();
+    List<Moto> findAllByOwnerEmail(String email);
     void deleteById(Long id);
 }

@@ -22,7 +22,7 @@ public class CadastrarMotoService implements CadastrarMotoUseCase {
     }
 
     @Override
-    public MotoOutputDto execute(MotoInputDto input) {
+    public MotoOutputDto execute(MotoInputDto input, String ownerEmail) {
         // Conversão do DTO para Entidade de Domínio
         Moto moto = new Moto(
             null,
@@ -30,7 +30,8 @@ public class CadastrarMotoService implements CadastrarMotoUseCase {
             input.ano(),
             input.km(),
             input.placa(),
-            input.vin()
+            input.vin(),
+            ownerEmail
         );
 
         // Operação de persistência via porta de saída
@@ -43,7 +44,8 @@ public class CadastrarMotoService implements CadastrarMotoUseCase {
             motoSalva.getAno(),
             motoSalva.getKm(),
             motoSalva.getPlaca(),
-            motoSalva.getVin()
+            motoSalva.getVin(),
+            motoSalva.getOwnerEmail()
         );
     }
 }
