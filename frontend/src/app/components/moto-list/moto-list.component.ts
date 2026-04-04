@@ -11,12 +11,15 @@ interface Moto {
   km: number;
   placa: string;
   vin: string;
+  dataUltimaAtualizacao: string;
 }
+
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-moto-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   template: `
     <div class="min-h-screen bg-ironbase text-white p-6 md:p-12 selection:bg-ironaccent selection:text-white">
       <!-- Decor Background -->
@@ -93,14 +96,32 @@ interface Moto {
                 </div>
               </div>
               
-              <div class="flex items-center justify-between mt-8 bg-ironbase/50 p-5 rounded-2xl border border-white/5 group-hover:border-ironaccent/20 transition-all">
-                <div>
-                  <p class="text-[9px] text-gray-500 uppercase font-black tracking-[0.2em] leading-none mb-2">Quilometragem</p>
-                  <p class="text-2xl font-black text-white leading-none italic font-brand">{{ moto.km | number }} <span class="text-xs text-ironaccent ml-1 font-bold">KM</span></p>
-                </div>
-                <button class="bg-white/5 hover:bg-ironaccent p-4 rounded-xl transition-all duration-300 group-hover:shadow-ironaccent/20 group-hover:shadow-lg">
-                  <span class="text-ironaccent group-hover:text-white transition-colors">➔</span>
-                </button>
+              <div class="flex items-center justify-between mt-8 bg-ironbase/50 p-5 rounded-2xl border border-white/5 group-hover:border-ironaccent/20 transition-all relative">
+                @if (updatingId() === moto.id) {
+                  <div class="flex-1 mr-4 animate-in fade-in slide-in-from-left-2 duration-300">
+                    <p class="text-[9px] text-ironaccent uppercase font-black tracking-[0.2em] leading-none mb-2">Novo Hodômetro</p>
+                    <input type="number" [(ngModel)]="newKmValue" 
+                      class="bg-transparent text-2xl font-black text-white w-full border-none outline-none focus:ring-0 italic font-brand"
+                      placeholder="0" autofocus (keyup.enter)="saveKm(moto)">
+                  </div>
+                  <button (click)="saveKm(moto)" 
+                    class="bg-ironaccent hover:bg-orange-700 p-4 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(242,95,15,0.4)] animate-pulse">
+                    <span class="text-white">✓</span>
+                  </button>
+                  <button (click)="cancelEdit()" class="absolute -top-3 -right-3 bg-white/10 hover:bg-red-500/20 text-[8px] p-1.5 rounded-full border border-white/10 text-gray-500 hover:text-red-400">✕</button>
+                } @else {
+                  <div>
+                    <p class="text-[9px] text-gray-500 uppercase font-black tracking-[0.2em] leading-none mb-2">Quilometragem</p>
+                    <p class="text-2xl font-black text-white leading-none italic font-brand">{{ moto.km | number }} <span class="text-xs text-ironaccent ml-1 font-bold">KM</span></p>
+                    @if (moto.dataUltimaAtualizacao) {
+                      <p class="text-[8px] text-gray-600 uppercase font-bold mt-2 tracking-widest leading-none">Atualizado: {{ moto.dataUltimaAtualizacao | date:'dd/MM/yyyy' }}</p>
+                    }
+                  </div>
+                  <button (click)="startEdit(moto)" 
+                    class="bg-white/5 hover:bg-ironaccent p-4 rounded-xl transition-all duration-300 group-hover:shadow-ironaccent/20 group-hover:shadow-lg">
+                    <span class="text-ironaccent group-hover:text-white transition-colors">➔</span>
+                  </button>
+                }
               </div>
             </div>
 
@@ -118,19 +139,47 @@ export class MotoListComponent implements OnInit {
 
   motos = signal<Moto[]>([]);
   loading = signal<boolean>(true);
+  updatingId = signal<number | null>(null);
+  newKmValue: number = 0;
 
   ngOnInit() {
     this.fetchMotos();
   }
 
   fetchMotos() {
-    // O interceptor já trata o Authorization header automaticamente
     this.http.get<Moto[]>('/api/v1/motos').subscribe({
       next: (data) => {
         this.motos.set(data);
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
+    });
+  }
+
+  startEdit(moto: Moto) {
+    this.updatingId.set(moto.id);
+    this.newKmValue = moto.km;
+  }
+
+  cancelEdit() {
+    this.updatingId.set(null);
+  }
+
+  saveKm(moto: Moto) {
+    if (this.newKmValue < moto.km) {
+      alert('A nova quilometragem não pode ser inferior à atual!');
+      return;
+    }
+
+    this.http.patch<Moto>(`/api/v1/motos/${moto.id}/hodometro`, { km: this.newKmValue }).subscribe({
+      next: (updatedMoto) => {
+        // Atualiza a lista localmente para efeito instantâneo
+        this.motos.update(prev => prev.map(m => m.id === updatedMoto.id ? updatedMoto : m));
+        this.updatingId.set(null);
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Erro ao atualizar hodômetro');
+      }
     });
   }
 
