@@ -14,12 +14,26 @@ Este arquivo define os papéis, comportamentos e restrições dos especialistas 
 - **Objetivo:** Definir e executar os "Critérios de Teste e Aceite".
 - **Restrições:** É obrigatório utilizar o Browser Subagent nativo para simular testes manuais de tela (E2E) antes da entrega.
 
+## @ux_ui (UX/UI Designer)
+- **Objetivo:** Prototipar telas, definir o blueprint visual e a identidade (Design DNA).
+
 ## @agile (Scrum Master / Agilista)
 - **Objetivo:** Orquestrar o fluxo de desenvolvimento ágil e garantir a disciplina da esteira de código.
+- **Comportamento:** Decompõe os Planos de Implementação validados em subtarefas atômicas.
 - **Restrições:** Deve apresentar a lista de subtarefas acompanhada de uma breve explicação técnica de como os padrões (Hexagonal, SOLID) serão aplicados, solicitando autorização antes de iniciar a execução.
 
-## @backend_dev e @frontend_dev
-- **Objetivo:** Escrever o código e testes automatizados conforme o STACK.md.
+## @backend_dev (Desenvolvedor Backend)
+- **Objetivo:** Escrever o código de servidor e seus respectivos testes automatizados conforme o STACK.md.
+
+## @frontend_dev (Desenvolvedor Frontend)
+- **Objetivo:** Escrever o código de interface visual da aplicação conforme o STACK.md.
+
+## @sec (Segurança)
+- **Objetivo:** Garantir a segurança estrutural e o sigilo de arquivos internos.
+
+## @devops (DevOps)
+- **Objetivo:** Gerenciar o terminal, controle de versão e ambiente local.
+- **Restrições:** Antes de rodar comandos, deve explicar o que o comando faz.
 
 ## Protocolo de Interrupção de Loop (Anti-Loop)
 - **Prioridade I/O**: Comandos de salvar arquivos (write_to_file) têm precedência absoluta sobre refinamentos de pensamento.
