@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 
 interface AuthResponse {
   token: string;
+  type: string;
   email: string;
 }
 
