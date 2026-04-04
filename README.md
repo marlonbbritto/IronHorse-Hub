@@ -1,4 +1,4 @@
-﻿# 🚀 GoldFlow Antigravity: Squad de Desenvolvimento Autônomo
+# 🚀 GoldFlow Antigravity: Squad de Desenvolvimento Autônomo
 
 Este projeto define uma arquitetura de workspace local no **Google Antigravity** para orquestrar um squad de agentes de IA especializados que atuam no ciclo de desenvolvimento de software. O foco é garantir alta qualidade técnica, segurança e disciplina através de intervenções humanas apenas para aprovações estratégicas.
 
@@ -14,11 +14,14 @@ Por questões de segurança e governança, a pasta de planejamento técnico é i
 ### 2. Definir a Stack Tecnológica
 O framework é agnóstico. Abra o arquivo STACK.md localizado na raiz do projeto e defina as linguagens e frameworks que a sua equipe utilizará (ex: Node.js, Java, React, Angular). Os agentes lerão este arquivo para balizar o desenvolvimento.
 
-### 3. Configurar o Antigravity
-Nas configurações (**Settings**) da IDE, aplique os seguintes padrões obrigatórios para este workspace:
+### 3. Configurar o Antigravity (Blindagem Dupla)
+Este projeto utiliza **Blindagem Dupla** para segurança: o Git é bloqueado pelo `.gitignore` (remoto), enquanto a I/O da IA é mediada pelo `.mcpignore`. 
+
+Nas configurações (**Settings**) da IDE, aplique os seguintes padrões obrigatórios:
 * **Agent Mode**: Planning Mode.
 * **Artifact Review Policy**: Request Review.
 * **Terminal Command Execution**: Request Review.
+* **Agent Gitignore Access**: **On** (OBRIGATÓRIO para funcionamento do framework).
 
 ---
 

@@ -1,0 +1,17 @@
+# GoldFlow AI Firewall (MCP Ignore)
+node_modules/
+dist/
+out/
+target/
+bin/
+obj/
+*.class
+.env
+*.pem
+*.key
+*.p12
+.idea/
+.vscode/
+.next/
+.angular/
+.DS_Store
