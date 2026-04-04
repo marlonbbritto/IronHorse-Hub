@@ -14,10 +14,11 @@ public class Moto {
     private String placa;
     private String vin;
     private String ownerEmail;
+    private java.time.LocalDate dataUltimaAtualizacao;
 
     public Moto() {}
 
-    public Moto(Long id, String modelo, Integer ano, Double km, String placa, String vin, String ownerEmail) {
+    public Moto(Long id, String modelo, Integer ano, Double km, String placa, String vin, String ownerEmail, java.time.LocalDate dataUltimaAtualizacao) {
         validate(modelo, ano, km);
         this.id = id;
         this.modelo = modelo;
@@ -26,6 +27,11 @@ public class Moto {
         this.placa = placa;
         this.vin = vin;
         this.ownerEmail = ownerEmail;
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
+
+    public Moto(Long id, String modelo, Integer ano, Double km, String placa, String vin, String ownerEmail) {
+        this(id, modelo, ano, km, placa, vin, ownerEmail, null);
     }
 
     private void validate(String modelo, Integer ano, Double km) {
@@ -61,6 +67,17 @@ public class Moto {
         validate(this.modelo, this.ano, km);
         this.km = km; 
     }
+
+    public void atualizarKm(Double novaKm) {
+        if (novaKm == null || novaKm < this.km) {
+            throw new IllegalArgumentException("A nova quilometragem não pode ser inferior à atual (" + this.km + " km)");
+        }
+        this.km = novaKm;
+        this.dataUltimaAtualizacao = java.time.LocalDate.now();
+    }
+
+    public java.time.LocalDate getDataUltimaAtualizacao() { return dataUltimaAtualizacao; }
+    public void setDataUltimaAtualizacao(java.time.LocalDate dataUltimaAtualizacao) { this.dataUltimaAtualizacao = dataUltimaAtualizacao; }
 
     public String getPlaca() { return placa; }
     public void setPlaca(String placa) { this.placa = placa; }

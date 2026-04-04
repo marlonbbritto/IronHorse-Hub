@@ -63,6 +63,7 @@ public class MotoRepositoryAdapter implements MotoRepository {
         entity.setPlaca(domain.getPlaca());
         entity.setVin(domain.getVin());
         entity.setOwnerEmail(domain.getOwnerEmail());
+        entity.setDataUltimaAtualizacao(domain.getDataUltimaAtualizacao());
         return entity;
     }
 
@@ -74,7 +75,8 @@ public class MotoRepositoryAdapter implements MotoRepository {
             entity.getKm(),
             entity.getPlaca(),
             entity.getVin(),
-            entity.getOwnerEmail()
+            entity.getOwnerEmail(),
+            entity.getDataUltimaAtualizacao()
         );
     }
 }

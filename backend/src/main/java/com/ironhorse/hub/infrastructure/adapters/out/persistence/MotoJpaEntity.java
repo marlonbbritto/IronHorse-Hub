@@ -30,6 +30,9 @@ public class MotoJpaEntity {
     @Column(name = "owner_email", nullable = false)
     private String ownerEmail;
 
+    @Column(name = "data_ultima_atualizacao")
+    private java.time.LocalDate dataUltimaAtualizacao;
+
     public MotoJpaEntity() {}
 
     // Getters e Setters
@@ -47,4 +50,6 @@ public class MotoJpaEntity {
     public void setVin(String vin) { this.vin = vin; }
     public String getOwnerEmail() { return ownerEmail; }
     public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
+    public java.time.LocalDate getDataUltimaAtualizacao() { return dataUltimaAtualizacao; }
+    public void setDataUltimaAtualizacao(java.time.LocalDate dataUltimaAtualizacao) { this.dataUltimaAtualizacao = dataUltimaAtualizacao; }
 }
