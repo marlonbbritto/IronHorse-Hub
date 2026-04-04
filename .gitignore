@@ -22,3 +22,6 @@ npm-debug.log*
 # OS
 Thumbs.db
 .DS_Store
+
+# Technical planning (SQUAD)
+_planejamento_squad/
